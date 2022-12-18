@@ -17,9 +17,8 @@ public class ActiveProfiles {
 	}
 
 	public void isProfileSet() {
-		String[] activeProfiles = environment.getActiveProfiles();
-		Arrays.stream(activeProfiles).forEach(c -> {
-			if(c.equals("${profile}")) {
+		Arrays.stream(environment.getActiveProfiles()).forEach(c -> {
+			if (c.equals("${profile}")) {
 				System.err.println("PLEASE SET PROFILE EG. PROD, TEST");
 				throw new SetProfileException("please set profile eg. prod, test");
 			}
