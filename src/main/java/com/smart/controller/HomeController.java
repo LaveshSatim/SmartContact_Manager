@@ -14,6 +14,12 @@ public class HomeController implements ErrorController {
 		return "home";
 	}
 
+	@RequestMapping("/about")
+	public String getAboutPage(Model model) {
+		model.addAttribute("name", "about us");
+		return "about";
+	}
+
 	// error handler
 	@RequestMapping("/error")
 	public String errorPage() {
