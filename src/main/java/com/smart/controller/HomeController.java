@@ -14,6 +14,18 @@ public class HomeController implements ErrorController {
 		return "home";
 	}
 
+	@RequestMapping("/signup")
+	public String signup(Model model) {
+		model.addAttribute("name", "Signup");
+		return "signup";
+	}
+
+	@RequestMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("name", "Login");
+		return "login";
+	}
+
 	@RequestMapping("/about")
 	public String getAboutPage(Model model) {
 		model.addAttribute("name", "about us");
