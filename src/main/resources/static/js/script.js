@@ -1,1 +1,1 @@
-console.log("this is script life")
+console.log("this is script  life")
