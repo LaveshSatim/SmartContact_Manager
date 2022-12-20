@@ -7,10 +7,63 @@
 </head>
 <body>
 
-	<section
-		class="banner d-flex justify-content-center align-items-center">
-		<div class="text-center">
-			<h1 class="font-weight-bold">This is Signup Page</h1>
+	<section>
+		<div class="container">
+			<div class="row">
+
+
+				<div class="col-md-8 offset-md-2">
+
+					<div class="text-center container mt-3">
+						<img alt="logo" th:src="@{/img/add-friend.png}"
+							style="width: 80px;" class="mx-auto">
+					</div>
+
+					<div class="mycard">
+						<h1 class="text-center">Register Here</h1>
+
+						<form th:action="@{/do_register}" method="post">
+
+							<div class="form-group">
+								<!-- NAME -->
+								<label for="name_field" class="form-label">Your Name</label> <input
+									type="text" class="form-control" id="name_field"
+									aria-describedby="emailHelp" placeholder="Enter Here"
+									required="required">
+							</div>
+
+							<div class="form-group">
+								<!-- email -->
+								<label for="email_field" class="form-label">Your Email</label> <input
+									type="email" class="form-control" id="email_field"
+									aria-describedby="emailHelp" placeholder="Enter Here"
+									required="required">
+							</div>
+
+							<div class="form-group">
+								<!-- password -->
+								<label for="password_field" class="form-label">Your
+									Password</label> <input type="password" class="form-control"
+									id="password_field" aria-describedby="emailHelp"
+									placeholder="Enter Here" required="required">
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">About</label>
+								<textarea placeholder="Enter something yourself" rows="10"
+									class="form-control"></textarea>
+							</div>
+							<br>
+							<div class="container text-center">
+								<button type="submit" class="btn bg-primary text-white">Submit</button>
+								<button type="reset" class="btn bg-warning text-white">Reset</button>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </body>
