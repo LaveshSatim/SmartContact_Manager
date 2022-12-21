@@ -20,24 +20,32 @@
 					</div>
 
 					<div class="mycard">
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}" class="alert"
+							role="alert">
+							<p class="text-center" th:text="${session.message.content}"></p>
+
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+						</div>
 						<h1 class="text-center">Register Here</h1>
 
-						<form th:action="@{/do_register}" method="post">
+						<form th:action="@{/do_register}" method="post"
+							th:object="${user}">
 
 							<div class="form-group">
 								<!-- NAME -->
 								<label for="name_field" class="form-label">Your Name</label> <input
-									type="text" class="form-control" id="name_field"
+									type="text" class="form-control" id="name_field" name="name"
 									aria-describedby="emailHelp" placeholder="Enter Here"
-									required="required">
+									required="required" th:value="${user.name}">
 							</div>
 
 							<div class="form-group">
 								<!-- email -->
 								<label for="email_field" class="form-label">Your Email</label> <input
-									type="email" class="form-control" id="email_field"
+									type="email" class="form-control" id="email_field" name="email"
 									aria-describedby="emailHelp" placeholder="Enter Here"
-									required="required">
+									required="required" th:value="${user.email}">
 							</div>
 
 							<div class="form-group">
@@ -45,13 +53,19 @@
 								<label for="password_field" class="form-label">Your
 									Password</label> <input type="password" class="form-control"
 									id="password_field" aria-describedby="emailHelp"
-									placeholder="Enter Here" required="required">
+									name="password" placeholder="Enter Here" required="required">
 							</div>
 
 							<div class="form-group">
 								<label class="form-label">About</label>
 								<textarea placeholder="Enter something yourself" rows="10"
-									class="form-control"></textarea>
+									class="form-control" name="about"></textarea>
+							</div>
+							<div class="form-group form-check">
+								<input type="checkbox" name="agreement"
+									class="form-check-input " id="agreement"> <label
+									for="agreement">Accept terms and conditions</label>
+
 							</div>
 							<br>
 							<div class="container text-center">
