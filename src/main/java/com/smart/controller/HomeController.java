@@ -1,10 +1,12 @@
 package com.smart.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,13 +58,20 @@ public class HomeController implements ErrorController {
 	}
 
 	@PostMapping("do_register")
-	public String doRegister(@ModelAttribute("user") User user,
+	public String doRegister(@Valid @ModelAttribute("user") User user, BindingResult result,
 			@RequestParam(value = "agreement", defaultValue = "false") boolean check, Model model,
 			HttpSession session) {
 
 		try {
 			if (!check) {
 				throw new RuntimeException("please accept t and c");
+			}
+
+			if (result.hasErrors()) {
+				System.out.println("ERROR /-*/-*/-/-/" + result.toString());
+				model.addAttribute("user", user);
+				return "signup";
+
 			}
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);
@@ -76,7 +85,8 @@ public class HomeController implements ErrorController {
 
 			this.repository.save(user);
 			model.addAttribute("user", new User());
-
+			session.setAttribute("message", new Msg("successfully register", "alert-success"));
+			return "signup";
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -84,8 +94,6 @@ public class HomeController implements ErrorController {
 			session.setAttribute("message", new Msg(e.getMessage(), "alert-danger"));
 			return "signup";
 		}
-		session.setAttribute("message", new Msg("successfully register", "alert-success"));
-		return "signup";
-	}
 
+	}
 }

@@ -29,15 +29,20 @@
 						</div>
 						<h1 class="text-center">Register Here</h1>
 
-						<form th:action="@{/do_register}" method="post"
+						<form novalidate th:action="@{/do_register}" method="post"
 							th:object="${user}">
 
 							<div class="form-group">
 								<!-- NAME -->
 								<label for="name_field" class="form-label">Your Name</label> <input
-									type="text" class="form-control" id="name_field" name="name"
-									aria-describedby="emailHelp" placeholder="Enter Here"
-									required="required" th:value="${user.name}">
+									type="text" class="form-control" id="name_field"
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+									name="name" aria-describedby="emailHelp"
+									placeholder="Enter Here" required="required"
+									th:value="${user.name}">
+
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
 							</div>
 
 							<div class="form-group">
@@ -45,21 +50,28 @@
 								<label for="email_field" class="form-label">Your Email</label> <input
 									type="email" class="form-control" id="email_field" name="email"
 									aria-describedby="emailHelp" placeholder="Enter Here"
+									th:classappend="${#fields.hasErrors('email') ? 'is-invalid':''}"
 									required="required" th:value="${user.email}">
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
 							</div>
 
 							<div class="form-group">
 								<!-- password -->
 								<label for="password_field" class="form-label">Your
 									Password</label> <input type="password" class="form-control"
-									id="password_field" aria-describedby="emailHelp"
+									th:value="${user.password}" id="password_field"
+									aria-describedby="emailHelp"
+									th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
 									name="password" placeholder="Enter Here" required="required">
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('password')}" th:text="${e}"></div>
 							</div>
 
 							<div class="form-group">
 								<label class="form-label">About</label>
-								<textarea placeholder="Enter something yourself" rows="10"
-									class="form-control" name="about"></textarea>
+								<textarea placeholder="Enter something yourself" rows="8"
+									th:field="${user.about}" class="form-control" name="about"></textarea>
 							</div>
 							<div class="form-group form-check">
 								<input type="checkbox" name="agreement"
